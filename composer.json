@@ -8,8 +8,8 @@
         "steady-as-hill/sooh-ini":">=1.0"
     },
     "autoload": {
-      "psr-4": { "Sooh\\CurlClasses\\": "src/CurlClasses" },
-        "classmap":["src/Curl.php"]
+      "psr-4": { "Sooh\\DBClasses\\": "src/DBClasses" },
+        "classmap":["src/DB.php"]
     }
 }
 
