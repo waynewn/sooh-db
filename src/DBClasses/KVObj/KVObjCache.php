@@ -11,7 +11,7 @@ class KVObjCache extends KVObjRW{
      * cache模式下，主库更新了，从库也需要更新(忽略更新从库失败的情况)
      */
     public function saveToDB($func_update = null, $maxRetry = 3) {
-        $verField = \Sooh2\DB::version_field();
+        $verField = \Sooh\DBClasses::version_field();
         if($this->_reader->exists()){
             $readerVersion = $this->_reader->getField($verField);
         }else{
@@ -27,7 +27,7 @@ class KVObjCache extends KVObjRW{
                 }
                 $this->_reader->saveToDB();
             }catch(\ErrorException $e){
-                \Sooh2\Misc\Loger::getInstance()->app_warning("Error on update cache of ". get_called_class().' with'. json_encode($this->_reader->pkey()).':'.$e->getMessage());
+                \Sooh\Loger::getInstance()->app_error("Error on update cache of ". get_called_class().' with'. json_encode($this->_reader->pkey()).':'.$e->getMessage());
                 //出于未知原因可能导致rowVersion不对了导致更新失败，这里先删除一次
                 $db = $this->_reader->dbWithTablename();
                 $db->delRecords($db->kvobjTable(),$this->_reader->pkey());
@@ -57,11 +57,11 @@ class KVObjCache extends KVObjRW{
                     $this->_reader->forceInsert();
                     $ret = $this->_reader->saveToDB();
                     if($ret==false){
-                        \Sooh2\Misc\Loger::getInstance()->sys_warning('data load from disk ok,but write cache failed ('.json_encode($this->_pkey).'),assume same as this one ');
+                        \Sooh\Loger::getInstance()->sys_error('data load from disk ok,but write cache failed ('.json_encode($this->_pkey).'),assume same as this one ');
                     }
                 }
             }catch(\ErrorException $e){
-                \Sooh2\Misc\Loger::getInstance()->sys_warning('data load from disk ok,but write cache failed ('.json_encode($this->_pkey).'):'.$e->getMessage());
+                \Sooh\Loger::getInstance()->sys_error('data load from disk ok,but write cache failed ('.json_encode($this->_pkey).'):'.$e->getMessage());
             }
         }
         return $ret;

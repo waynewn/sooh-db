@@ -160,7 +160,7 @@ class UserOrdersRet {
         try{
             $accMirror->saveToDB();
         } catch (\ErrorException $ex) {
-            \Sooh2\Misc\Loger::getInstance()->app_warning('对账时记录用户'.$this->_uid.'失败（'.$ex->getMessage().'）'.json_encode( $accMirror->dump()  ));
+            \Sooh\Loger::getInstance()->app_error('对账时记录用户'.$this->_uid.'失败（'.$ex->getMessage().'）'.json_encode( $accMirror->dump()  ));
         }
         $this->freeAccMirror($accMirror);
     }

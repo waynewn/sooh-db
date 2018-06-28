@@ -58,9 +58,9 @@
 
 ### 3.1 依赖 
 
-- \Sooh2\Misc\Loger
+- \Sooh\Loger
 - \Sooh\DBClasses\KVObj
-- \Sooh2\Misc\Ini 
+- \Sooh\Ini 
 
 ### 3.2 重点系统类&常量 
 

@@ -146,7 +146,7 @@ class Orders extends \Sooh\DBClasses\KVObj{
             $db->kvobjTable($tb);
             $ret->chkUserOrders($db,$this->batchYmd);
         } catch (\ErrorException $e){
-            \Sooh2\Misc\Loger::getInstance()->app_warning("QSC：recheck err".$uid.'#'.$e->getMessage()."\n".$e->getTraceAsString());
+            \Sooh\Loger::getInstance()->app_error("QSC：recheck err".$uid.'#'.$e->getMessage()."\n".$e->getTraceAsString());
             $ret->appendErrorException($e);
         }
         $ret->updUser();

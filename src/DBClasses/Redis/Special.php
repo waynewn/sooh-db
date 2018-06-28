@@ -14,13 +14,13 @@ class Special extends Cmd{
      */
     public static function getInstance($arrConnIni)
     {
-        $conn = \Sooh2\DB::getConn($arrConnIni);
+        $conn = \Sooh\DBClasses::getConn($arrConnIni);
         $guid = 'redis@'.$conn->guid;
-        if(!isset(\Sooh2\DB::$pool[$guid])){
-            \Sooh2\DB::$pool[$guid] = new Special();
-            \Sooh2\DB::$pool[$guid]->connection = $conn;
+        if(!isset(\Sooh\DBClasses::$pool[$guid])){
+            \Sooh\DBClasses::$pool[$guid] = new Special();
+            \Sooh\DBClasses::$pool[$guid]->connection = $conn;
         }
-        return \Sooh2\DB::$pool[$guid];
+        return \Sooh\DBClasses::$pool[$guid];
     }
     public function getStr($key,$where=null)
     {

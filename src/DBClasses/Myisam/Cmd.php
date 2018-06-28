@@ -72,7 +72,7 @@ class Cmd
                 $ex->keyDuplicated=$dupKey;
             }            
             if(!isset($this->skip[$err])){
-                \Sooh2\Misc\Loger::getInstance()->sys_warning("[".$ex->getCode()."]".$ex->getMessage()."\n". $this->_lastCmd." by ".$this->connection->guid."\n".$ex->getTraceAsString());
+                \Sooh\Loger::getInstance()->sys_error("[".$ex->getCode()."]".$ex->getMessage()."\n". $this->_lastCmd." by ".$this->connection->guid."\n".$ex->getTraceAsString());
                 $this->skip=array();
                 throw $ex;
             }else{
@@ -108,7 +108,7 @@ class Cmd
             $this->connect();
         }
         foreach($cmds as $cmd){
-            \Sooh2\Misc\Loger::getInstance()->lib_trace("TRACE: try @". (empty($this->connection->server)?"":$this->connection->server) ." $cmd");
+            \Sooh\Loger::getInstance()->lib_trace("TRACE: try @". (empty($this->connection->server)?"":$this->connection->server) ." $cmd");
             $rs0 = mysqli_query($this->connection->connected, $this->_lastCmd=$cmd);
             $this->chkError();
         }

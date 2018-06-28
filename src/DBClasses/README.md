@@ -36,7 +36,7 @@
 
 ### 2.2 基本用法
 
-        $db = \Sooh2\DB::getDB($ini);//获取数据库实例(在没有实际操作之前，不连接数据库)
+        $db = \Sooh\DBClasses::getDB($ini);//获取数据库实例(在没有实际操作之前，不连接数据库)
         $db->addRecord('db.table1',array('createTime'=>'2017-1-1'),array('id'=>1,));//为了兼容
 
         $r = $db->getRecord('db.table1','*', array('a'=>$db->getCol('db.table2','id',array('>createTime'=>'2017-1-1'))));
@@ -47,7 +47,7 @@
         
         echo $db->lastCmd(); 
 
-        //框架级程序执行完后，建议执行 \Sooh2\DB::free() 释放资源
+        //框架级程序执行完后，建议执行 \Sooh\DBClasses::free() 释放资源
 ### 2.3 专属类
 
 数据库特性操作，比如redis设置超时等放在专属类里
@@ -66,7 +66,7 @@
             try{
                 $obj->setField('lastActive',time());
             }catch(\ErrorException $e){
-                \Sooh2\Misc\Loger::getInstnace()->app_warning('err:'.$e->getMessage())
+                \Sooh\Loger::getInstnace()->app_error('err:'.$e->getMessage())
             }
         }else{
             echo '用户不存在';
@@ -81,8 +81,8 @@
 
 ### 3.1 依赖 
 
-- \Sooh2\Misc\Loger 会tracelog所有执行的命令语句
-- \Sooh2\Misc\Ini （KVObj使用其获取配置）
+- \Sooh\Loger 会tracelog所有执行的命令语句
+- \Sooh\Ini （KVObj使用其获取配置）
 
 ### 3.2 重点系统类&常量 
 

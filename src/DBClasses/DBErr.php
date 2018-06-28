@@ -1,5 +1,5 @@
 <?php
-namespace Sooh2\DB;
+namespace Sooh\DBClasses;
 
 class DBErr extends \ErrorException
 {

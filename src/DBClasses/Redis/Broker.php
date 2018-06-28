@@ -21,12 +21,12 @@ class Broker extends Cmd implements \Sooh\DBClasses\Interfaces\DBReal
 
     protected function chkError($stepErrorId=null)
     {
-        \Sooh2\Misc\Loger::getInstance()->sys_warning("TRACE chkerror in redis is ignored");
+        \Sooh\Loger::getInstance()->sys_error("TRACE chkerror in redis is ignored");
     }
 
     public function skipErrorLog($skipThisError)
     {
-        \Sooh2\Misc\Loger::getInstance()->sys_warning("TRACE skipError in redis is ignored");
+        \Sooh\Loger::getInstance()->sys_error("TRACE skipError in redis is ignored");
         return $this;
     }
     protected $skip=array();
@@ -193,7 +193,7 @@ class Broker extends Cmd implements \Sooh\DBClasses\Interfaces\DBReal
 		}
 		if(!empty($err)){
 			$err->keyDuplicated='PRIMARY';
-			\Sooh2\Misc\Loger::getInstance()->sys_warning("[".$err->getCode()."]".$err->getMessage()."\n". $this->_lastCmd."\n".$err->getTraceAsString());
+			\Sooh\Loger::getInstance()->sys_error("[".$err->getCode()."]".$err->getMessage()."\n". $this->_lastCmd."\n".$err->getTraceAsString());
 			throw $err;
 		}else{
 		    $this->_lastCmd = $cmdBak;

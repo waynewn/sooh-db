@@ -1,5 +1,5 @@
 <?php
-namespace Sooh2\DB;
+namespace Sooh\DBClasses;
 
 use Sooh\DBClasses\KVObj\KVObjLoop;
 
@@ -14,7 +14,7 @@ class KVObj extends KVObj\KVObjBase
     {
         $this->field_locker=null;//  悲观锁用的字段名，默认使用'rowLock'，设置为null表明不需要悲观锁
         $this->indexes=array();//保留
-        $objIni = \Sooh2\Misc\Ini::getInstance()->getIni('KVObj');
+        $objIni = \Sooh\Ini::getInstance()->getIni('KVObj');
         if(isset($objIni[$this->className])){
             $objIni = $objIni[$this->className];
         }elseif(isset($objIni['default'])){

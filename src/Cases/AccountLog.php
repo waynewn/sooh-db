@@ -212,7 +212,7 @@ class AccountLog extends \Sooh\DBClasses\KVObj{
             }
             
         }
-        \Sooh2\Misc\Loger::getInstance()->app_warning($fields,'add records failed after retry, lastRecord status='.$lastRecord['alStatus']);
+        \Sooh\Loger::getInstance()->sys_error($fields,'add records failed after retry, lastRecord status='.$lastRecord['alStatus']);
         if($lastRecord['alStatus']==-1){
             $this->throwErrorUnfinishOrderFound();
         }else{

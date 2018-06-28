@@ -82,7 +82,7 @@ class KVObjRW implements Interfaces
      * @return bool 更新成功或失败
      */
     public function saveToDB($func_update=null, $maxRetry=3){
-        $verName = \Sooh2\DB::version_field();
+        $verName = \Sooh\DBClasses::version_field();
         try{
             $verValue = $this->_writer->getField($verName);
             if($verValue != $this->_reader->getField($verName) && $func_update===null){//rowVersion not match

@@ -100,7 +100,7 @@ class KVObjBase
             $chkid = $splitIndex;
         }
         $dbsize = sizeof($this->dbList);
-        $dbIniList = \Sooh2\Misc\Ini::getInstance()->getIni('DB');
+        $dbIniList = \Sooh\Ini::getInstance()->getIni('DB');
         $r = explode('.', $this->dbList[$chkid%$dbsize]);
         if(sizeof($r)==1){//使用默认库
             $dbConf = $dbIniList[ $r[0] ];
@@ -114,9 +114,9 @@ class KVObjBase
             throw new \ErrorException('dbConf of kvobj:'.$this->className.' not found');
         }
         if($splitIndex==null){
-            return $this->dbTbUsed = array(\Sooh2\DB::getDB($dbConf),$tbName);
+            return $this->dbTbUsed = array(\Sooh\DBClasses::getDB($dbConf),$tbName);
         }else{
-            return array(\Sooh2\DB::getDB($dbConf),$tbName);
+            return array(\Sooh\DBClasses::getDB($dbConf),$tbName);
         }
     }
     public function dump()
@@ -247,7 +247,7 @@ class KVObjBase
             throw new \ErrorException('lock unsupport or locked already');
         }
         if(!empty($this->chged)){
-            \Sooh2\Misc\Loger::getInstance()->app_trace('try lock '.$this->className.'('.\Sooh2\Util::toJsonSimple($this->pkey()).') with sth changed already');
+            \Sooh\Loger::getInstance()->app_trace('try lock '.$this->className.'('.\Sooh2\Util::toJsonSimple($this->pkey()).') with sth changed already');
         }
         $retry = 3;
         while($retry>0){
@@ -297,7 +297,7 @@ class KVObjBase
     }
     protected function verFieldName()
     {
-        return \Sooh2\DB::version_field();
+        return \Sooh\DBClasses::version_field();
     }
     /**
      * 保存到数据库，可以尝试几次（保存失败后重新加载，调用预定义的操作函数，再次尝试保存），过程中碰到异常抛出不拦截
@@ -308,7 +308,7 @@ class KVObjBase
      */
     public function saveToDB($func_update=null, $maxRetry=3)
     {
-        $loger = \Sooh2\Misc\Loger::getInstance();
+        $loger = \Sooh\Loger::getInstance();
         //error_log( "[tracelevel]".$loger->traceLevel());
         $verField = $this->verFieldName();
         $where = $this->_pkey;

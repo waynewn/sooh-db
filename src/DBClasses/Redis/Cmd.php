@@ -46,7 +46,7 @@ class Cmd
     {
         if(!$this->connection->connected){
             try{
-                \Sooh2\Misc\Loger::getInstance()->sys_trace("TRACE: Redis connecting");
+                \Sooh\Loger::getInstance()->sys_trace("TRACE: Redis connecting");
                 $this->connection->getConnHandle();
                 $this->connection->change2DB($this->connection->dbNameDefault);
                 return $this->connection->connected;
@@ -85,7 +85,7 @@ class Cmd
         foreach($cmds as $cmd){
             $f = array_shift($cmd);
             $this->_lastCmd = $f.'('.json_encode($cmd).')';
-            \Sooh2\Misc\Loger::getInstance()->lib_trace("TRACE: try @". (empty($this->connection->server)?"":$this->connection->server) ." ".$this->_lastCmd);
+            \Sooh\Loger::getInstance()->lib_trace("TRACE: try @". (empty($this->connection->server)?"":$this->connection->server) ." ".$this->_lastCmd);
 
             $lastRecordSet = call_user_func_array(array($this->connection->connected,$f), $cmd);
         }
@@ -130,7 +130,7 @@ class Cmd
                     $where = $where['&'];
                 }
             }
-            $v = \Sooh2\DB::version_field();
+            $v = \Sooh\DBClasses::version_field();
             $allkeys = array();
             if(isset($where[$v])){
                 $this->arrVer=array('=',$v,$where[$v]);

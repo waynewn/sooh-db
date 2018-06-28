@@ -14,7 +14,7 @@ class Conn extends \Sooh\DBClasses\Interfaces\Conn {
         }
         if(!$this->connected){
             try{
-                \Sooh2\Misc\Loger::getInstance()->sys_trace("TRACE: Mongo connecting");
+                \Sooh\Loger::getInstance()->sys_trace("TRACE: Mongo connecting");
                 if($this->user!='ignore'&& $this->pass!='ignore'){
                     $str = "{$this->user}:{$this->pass}@";
                 }else{

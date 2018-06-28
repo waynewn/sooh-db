@@ -85,7 +85,7 @@ class CacheSimple extends \Sooh\DBClasses\KVObj{
                 $obj->setExpire();
             }
         } catch (\Sooh\DBClasses\DBErr $ex) {
-            \Sooh2\Misc\Loger::getInstance()->app_trace('error on save cache:'.$ex->getMessage());
+            \Sooh\Loger::getInstance()->sys_error('error on save cache:'.$ex->getMessage());
         }
     }
 }

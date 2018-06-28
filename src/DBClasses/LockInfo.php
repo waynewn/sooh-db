@@ -1,5 +1,5 @@
 <?php
-namespace Sooh2\DB;
+namespace Sooh\DBClasses;
 /**
  * 锁字段封装类（即使开启锁的时候的信息是空串，也没有扩展数据，串行化后也会需要大约50长度）
  * @author simon.wang
@@ -75,12 +75,7 @@ class LockInfo {
      */
     public function lock($reason,$ext='',$dur=86400000)
     {
-        if(class_exists('\\Sooh2\\Misc\\Ini',false)){
-            $serverId=\Sooh2\Misc\Ini::getInstance()->getServerId();
-        }else{
-            $serverId = 0;
-        }
-        $this->processId = getmypid().'@'.$serverId;
+        $this->processId = getmypid().'@'. gethostname();
         $this->reason=$reason;
         $this->time = time();
         $this->expire = $this->time+$dur;

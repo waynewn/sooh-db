@@ -16,7 +16,7 @@ class Cmd
     {
         if(!$this->connection->connected){
             try{
-                \Sooh2\Misc\Loger::getInstance()->sys_trace("TRACE: Mongodb connecting");
+                \Sooh\Loger::getInstance()->sys_trace("TRACE: Mongodb connecting");
                 $this->connection->getConnHandle();
                 $this->connection->change2DB($this->connection->dbNameDefault);
                 return $this->connection->connected;
@@ -128,7 +128,7 @@ class Cmd
 //            //dbname.tbname.insert({"_id":"abasdfhi3rabasdfhi3rabasdfhi3r123456","nickname":"张三","rowVersion":1});
 //            throw new \ErrorException('exec not support yet(mongodb)');
 //            $this->_lastCmd = $f.'('.json_encode($cmd).')';
-//            \Sooh2\Misc\Loger::getInstance()->lib_trace('TRACE: try '.$this->_lastCmd);
+//            \Sooh\Loger::getInstance()->lib_trace('TRACE: try '.$this->_lastCmd);
 //            if($f==self::do_query){
 //                $lastRecordSet = call_user_func_array(array($this->connection->connected,$f), $cmd);
 //            }else{
@@ -142,7 +142,7 @@ class Cmd
         if(empty($where)){
             return null;
         }
-        $rowVersion = \Sooh2\DB::version_field();
+        $rowVersion = \Sooh\DBClasses::version_field();
         if(isset($where[$rowVersion])){
             return array($rowVersion=>$where[$rowVersion]);
         }else{
@@ -158,7 +158,7 @@ class Cmd
                 throw new \ErrorException('where should be array '. gettype($where).' given');
             }
         }
-        $rowVersion = \Sooh2\DB::version_field();
+        $rowVersion = \Sooh\DBClasses::version_field();
         unset($where[$rowVersion]);
         
         if(sizeof($where)==1){

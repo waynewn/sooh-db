@@ -1,5 +1,5 @@
 <?php
-namespace Sooh2\DB;
+namespace Sooh\DBClasses;
 /**
  * Pager，内部pageid从0开始
  *

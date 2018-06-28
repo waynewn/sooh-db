@@ -14,7 +14,7 @@ class Conn extends \Sooh\DBClasses\Interfaces\Conn {
         }
         if(!$this->connected){
             try{
-                \Sooh2\Misc\Loger::getInstance()->sys_trace("TRACE: Redis connecting");
+                \Sooh\Loger::getInstance()->sys_trace("TRACE: Redis connecting");
                 $this->connected=new \Redis();
                 $this->connected->connect($this->server, $this->port);
                 $this->connected->auth($this->pass);

@@ -116,7 +116,7 @@ class DB
     public static function getConnection($arrConnection)
     {
         return self::getDB($arrConnection);
-//        \Sooh2\Misc\Loger::getInstance()->sys_warning('deprecated use getDB() instead ');
+//        \Sooh\Loger::getInstance()->sys_error('deprecated use getDB() instead ');
 //        if(is_string($arrConnection)){
 //            $arrConnection = json_decode($arrConnection,true);
 //        }
