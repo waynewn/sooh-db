@@ -1,0 +1,16 @@
+{
+
+    "name": "steady-as-hill/sooh-db",
+    "description": "db",
+    "keywords":         ["database driver"],
+    "license":          "MIT",
+    "require": {
+        "steady-as-hill/sooh-ini":">=1.0"
+    },
+    "autoload": {
+      "psr-4": { "Sooh\\CurlClasses\\": "src/CurlClasses" },
+        "classmap":["src/Curl.php"]
+    }
+}
+
+
